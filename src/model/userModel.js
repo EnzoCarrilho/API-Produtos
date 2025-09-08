@@ -55,6 +55,10 @@ const findById = (id) => {
     return users.find(user => user.id === id)
 }
 
+const findByName = (nome) => {
+    return users.find(user => user.nome === nome)
+}
+
 const create = (newUser) => {
     const newId = products.length > 0 ? products[products.length - 1].id + 1 : 1
     const user = {id: newId, ...newUser}
@@ -81,6 +85,7 @@ const remove = (id) => {
 module.exports = {
     findAll,
     findById,
+    findByName,
     create,
     alterate,
     remove
