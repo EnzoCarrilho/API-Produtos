@@ -17,8 +17,8 @@ const getById = (req, res) => {
 }
 
 const getByName = (req, res) => {
-    const name = req.params.name
-    const product = productModel.findByName(name)
+    const nome = req.params.nome
+    const product = productModel.findByName(nome)
 
     if(product){
         res.status(200).json(product)
@@ -30,27 +30,25 @@ const getByName = (req, res) => {
 const createProduct = (req, res) => {
     const {nome, descricao, preco, categoria, estoque} = req.body
 
-    if(!nome || !descricao || preco || categoria || estoque){
-        return res.status(400).json({mensagem: 'Nome e email são obrigatórios'})
+    if(!nome || !descricao || !preco || !categoria || !estoque){
+        return res.status(400).json({mensagem: 'Os campos são obrigatórios'})
     }else{
-        const disponibilidade = true
-
-        if(estoque == 0){
-            disponibilidade = false;
-        }else{
-            disponibilidade = true
-        }
-        const newUser = productModel.create({nome, descricao, preco, categoria, estoque, disponibilidade})
-        res.status(201).json(newUser)
+        const newProduct = productModel.create({nome, descricao, preco, categoria, estoque})
+        res.status(201).json(newProduct)
     }
 }
 
 const alterateProduct = (req, res) => {
-    
+    const id = parseInt(req.params.id)
+    const{nome, descricao, preco, categoria, estoque} = req.body
+
+    const product = productModel.alterate(id, {nome, descricao, preco, categoria, estoque})
+    res.status(200).json(product) 
+
 }
 
 const deleteProduct = (req, res) => {
-    const id = req.params.id
+    const id = parseInt(req.params.id)
     
     productModel.remove(id)
     res.status(200).json({mensagem: 'Produto deletado com sucesso!'})

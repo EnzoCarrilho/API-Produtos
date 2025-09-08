@@ -32,7 +32,7 @@ let products = [
         descricao: "Notebook com processador i5, 8GB RAM e SSD de 256GB.",
         preco: 3499.00,
         categoria: "Informática",
-        estoque: 10,
+        estoque: 0,
         disponibilidade: false
       },
       {
@@ -61,24 +61,34 @@ const findByName = (nome) => {
 
 const create = (newProduct) => {
     const newId = products.length > 0 ? products[products.length - 1].id + 1 : 1
-    const productWithId = {newId, ...newProduct}
-    products.push(productWithId)
-    return productWithId
+    const newDisponibilidade = newProduct.estoque > 0 ? true : false
+    const product = {id: newId, ...newProduct , disponibilidade: newDisponibilidade}
+    products.push(product)
+    return product
 }
 
-const alterate = (id) => {
+const alterate = (id, produto) => {
+  const index = products.findIndex(product => product.id === id)
+
+  if(produto.nome) products[index].nome = produto.nome
+  if(produto.descricao) products[index].descricao = produto.descricao
+  if(produto.preco) products[index].preco = produto.preco
+  if(produto.categoria) products[index].categoria = produto.categoria
+  if(produto.estoque) products[index].estoque = produto.estoque
+  if(!produto.estoque) products[index].estoque = 0
+
+
+  if(produto.estoque > 0 ){
+    products[index].disponibilidade = true 
+  }else{
+    products[index].disponibilidade = false 
+  }
 
 }
 
 const remove = (id) => {
-    const produto = products.find(product => product.id === id)
-    products.slice(produto)
-}
-
-if(products.estoque == 0){
-    disponibilidade = false;
-}else{
-    disponibilidade = true
+    const index = products.findIndex(product => product.id === id)
+    products.splice(index, 1)
 }
 
 module.exports = {
