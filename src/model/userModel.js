@@ -60,21 +60,25 @@ const findByName = (nome) => {
 }
 
 const create = (newUser) => {
-    const newId = products.length > 0 ? products[products.length - 1].id + 1 : 1
+    const newId = users.length > 0 ? users[users.length - 1].id + 1 : 1
     const user = {id: newId, ...newUser}
-    products.push(user)
+    users.push(user)
     return user
 }
 
-const alterate = (id, user) => {
+const update = (id, user) => {
     const index = users.findIndex(user => user.id === id)
 
-    user.nome ? users[index].nome = user.nome :
-    user.email ? users[index].email = user.email :
-    user.telefone ? users[index].telefone = user.telefone :
-    user.endereco ? users[index].endereco = user.endereco :
-    user.dataCadastro ? users[index].dataCadastro = user.dataCadastro :
-    user.ativo ? user[index].ativo = user.ativo : user.ativo = null 
+    if(user.nome) users[index].nome = user.nome
+    if(user.email) users[index].email = user.email
+    if(user.telefone) users[index].telefone = user.telefone
+    if(user.endereco) users[index].endereco = user.endereco
+    if(user.dataCadastro) users[index].dataCadastro = user.dataCadastro
+    if(user.ativo){ 
+        user[index].ativo = user.ativo
+    } else{
+      user.ativo = null
+    } 
 }
 
 const remove = (id) => {
@@ -87,7 +91,7 @@ module.exports = {
     findById,
     findByName,
     create,
-    alterate,
+    update,
     remove
 }
 

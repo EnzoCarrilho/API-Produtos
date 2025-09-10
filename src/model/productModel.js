@@ -67,7 +67,7 @@ const create = (newProduct) => {
     return product
 }
 
-const alterate = (id, produto) => {
+const update = (id, produto) => {
   const index = products.findIndex(product => product.id === id)
 
   if(produto.nome) products[index].nome = produto.nome
@@ -96,6 +96,6 @@ module.exports = {
     findById,
     findByName,
     create,
-    alterate,
+    update,
     remove
 }

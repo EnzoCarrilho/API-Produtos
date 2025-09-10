@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const porta = 8000
 const productRoutes = require('./src/routes/productRoutes')
+const userRoutes = require('./src/routes/userRoutes')
 
 app.use(express.json())
 

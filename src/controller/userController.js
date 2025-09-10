@@ -10,7 +10,7 @@ const getUserById = (req,res) => {
     const user = userModel.findById(id)
     
     if(user){
-        res.status(200).json(product)
+        res.status(200).json(user)
     }else{
         res.status(404).json({mensagem: "Usuário não encontrado!"})
     }
@@ -38,11 +38,11 @@ const createUser = (req,res) => {
     }    
 }
 
-const alterateUser = (req,res) => {
+const updateUser = (req,res) => {
     const id = parseInt(req.params.id)
     const{nome, email, telefone, endereco, dataCadastro, ativo} = req.body
     
-    const user = userModel.alterate(id, {nome, email, telefone, endereco, dataCadastro, ativo})
+    const user = userModel.update(id, {nome, email, telefone, endereco, dataCadastro, ativo})
     res.status(200).json(user) 
 }
 
@@ -58,6 +58,6 @@ module.exports = {
     getUserById,
     getUserByName,
     createUser,
-    alterateUser,
+    updateUser,
     deleteUser
 }

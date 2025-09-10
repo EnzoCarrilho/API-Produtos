@@ -16,6 +16,7 @@ const getById = (req, res) => {
     }
 }
 
+
 const getByName = (req, res) => {
     const nome = req.params.nome
     const product = productModel.findByName(nome)
@@ -38,11 +39,11 @@ const createProduct = (req, res) => {
     }
 }
 
-const alterateProduct = (req, res) => {
+const updateProduct = (req, res) => {
     const id = parseInt(req.params.id)
     const{nome, descricao, preco, categoria, estoque} = req.body
 
-    const product = productModel.alterate(id, {nome, descricao, preco, categoria, estoque})
+    const product = productModel.update(id, {nome, descricao, preco, categoria, estoque})
     res.status(200).json(product) 
 
 }
@@ -59,6 +60,6 @@ module.exports = {
     getById,
     getByName,
     createProduct,
-    alterateProduct,
+    updateProduct,
     deleteProduct
 }
